@@ -26,8 +26,8 @@ $stalk->timezone; //outputs clients timezone
 $stalk->datetime; //outputs clients datetime
 ```
 ## Initializer ___constructor(?Closure $on_fail, ?string $ip)_
- - `$ip` : An explicit IP.
  - `$on_fail`: A callback function that will be called if error occurred with IP data query.
+ - `$ip` : An explicit IP.
 ```php
 new Stalk(function (string $error) {
     var_dump($error);
