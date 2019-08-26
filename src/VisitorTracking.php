@@ -1,6 +1,6 @@
 <?php
 
-class Stalk
+class VisitorTracking
 {
     /** @var null|string $continent */
     public $continent       = null;
@@ -43,7 +43,7 @@ class Stalk
      */
     public function __construct(Closure $error_handler = null, string $ip = null)
     {
-        $this->ip = ($ip == null) ? $this->getIp() : $ip;
+        $this->ip = $ip == null ? $this->getIp() : $ip;
         $this->error_handler = $error_handler;
         $this->locate();
     }
@@ -146,12 +146,32 @@ class Stalk
     }
 
     /**
+     * Key value pair of all stack attribute.
+     *
+     * @return array
+     */
+    public function __toArray(): array
+    {
+        $properties = get_object_vars($this);
+        $properties['browser'] = (array) $properties['browser'];
+
+        return $properties;
+    }
+
+    /**
      * Makes an API request to keycdn
      */
     private function locate()
     {
-        $response = file_get_contents('https://tools.keycdn.com/geo.json?host=' . $this->ip);
-        $status = json_decode($response, true);
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_FOLLOWLOCATION => 1,
+            CURLOPT_URL            => 'https://tools.keycdn.com/geo.json?host=' . $this->ip
+        ]);
+        $response = curl_exec($curl);
+        $status   = json_decode($response, true);
+
         if ($status['status'] == 'error') {
             $error_handler = $this->error_handler;
             if ($error_handler) {

@@ -1,0 +1,28 @@
+{
+  "name": "ghostff/php-visitors-tracking",
+  "description": "99% accurate visitors tracking system for PHP  >= 7.0",
+  "type": "library",
+  "keywords": [
+    "geo",
+    "geo location",
+    "visitor tracking",
+    "user tracking",
+    "user location",
+    "visitors location"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Chrys Ugwu",
+      "email": "frankchris@hotmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "classmap": [
+      "src/VisitorTracking.php"
+    ]
+  }
+}

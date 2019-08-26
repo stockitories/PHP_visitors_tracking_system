@@ -1,15 +1,15 @@
 <?php
 
-include 'src/Stalk.php';
+include 'src/VisitorTracking.php';
 
 # bad IP
-$stalk = new Stalk(function ($error) {
+$visitor = new VisitorTracking(function ($error) {
     var_dump($error);
 }, '88.163.1sd83.16');
 
 
-$stalk = new Stalk(function ($error) {
+$visitor = new VisitorTracking(function ($error) {
     var_dump($error);
-}, '88.163.183.16');
+}, '76.185.141.126');
 
-var_dump($stalk->city . ' ' . $stalk->country);
+var_dump($visitor->city . ' ' . $visitor->country, $visitor->__toArray());
