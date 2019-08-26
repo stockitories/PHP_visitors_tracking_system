@@ -7,27 +7,27 @@ composer require ghostff/php-visitors-tracking
 
 # USAGE
 ```php
-$geo = new VisitorTracking;
+$visitor = new VisitorTracking;
 
 $visitor->ip; //outputs clients IP address
 
-$geo->browser->name; //outputs clients Browser name
-$geo->browser->version; //outputs clients Browser version
-$geo->browser->OS; //outputs clients Operating system
+$visitor->browser->name; //outputs clients Browser name
+$visitor->browser->version; //outputs clients Browser version
+$visitor->browser->OS; //outputs clients Operating system
 
-$geo->continent; //outputs clients continent name
-$geo->continent_code; //outputs continent code
-$geo->country; //outputs clients country name
-$geo->country_code; //outputs clients country code
-$geo->state; //outputs clients region name
-$geo->state_code; //outputs clients region code
-$geo->city; //outputs clients city
-$geo->postal_code; //outputs clients postal code
-$geo->metro_code; //outputs clients metro code
-$geo->latitude; //outputs clients latitude
-$geo->longitude; //outputs clients longitude
-$geo->timezone; //outputs clients timezone
-$geo->datetime; //outputs clients datetime
+$visitor->continent; //outputs clients continent name
+$visitor->continent_code; //outputs continent code
+$visitor->country; //outputs clients country name
+$visitor->country_code; //outputs clients country code
+$visitor->state; //outputs clients region name
+$visitor->state_code; //outputs clients region code
+$visitor->city; //outputs clients city
+$visitor->postal_code; //outputs clients postal code
+$visitor->metro_code; //outputs clients metro code
+$visitor->latitude; //outputs clients latitude
+$visitor->longitude; //outputs clients longitude
+$visitor->timezone; //outputs clients timezone
+$visitor->datetime; //outputs clients datetime
 ```
 ## Initializer ___constructor(?Closure $on_fail, ?string $ip)_
  - `$on_fail`: A callback function that will be called if error occurred with IP data query.
@@ -36,4 +36,11 @@ $geo->datetime; //outputs clients datetime
 new VisitorTracking(function (string $error) {
     var_dump($error);
 });
+```
+
+## Initializer ___toArray()_ 
+Returns array of all user properties.
+```php
+$visitor = new VisitorTracking(null, '85.13.6.242');
+var_dump($visitor->__toArray());
 ```
