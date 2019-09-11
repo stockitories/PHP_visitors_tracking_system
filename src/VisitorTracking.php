@@ -51,13 +51,13 @@ class VisitorTracking
     /**
      * Gets clients IP address.
      *
-     * @return mixed
+     * @return string
      */
-    private function getIp()
+    private function getIp(): string
     {
-        $client = @$_SERVER['HTTP_CLIENT_IP'];
+        $client  = @$_SERVER['HTTP_CLIENT_IP'];
         $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-        $remote = $_SERVER['REMOTE_ADDR'];
+        $remote  = $_SERVER['REMOTE_ADDR'];
 
         if (filter_var($client, FILTER_VALIDATE_IP)) {
             $ip = $client;
@@ -77,12 +77,12 @@ class VisitorTracking
      *
      * @return array
      */
-    private function getBrowser()
+    private function getBrowser(): array
     {
-        $u_agent = $_SERVER['HTTP_USER_AGENT'];
-        $platform = 'Unknown';
+        $u_agent      = $_SERVER['HTTP_USER_AGENT'];
+        $platform     = 'Unknown';
         $browser_name = 'Unknown';
-        $version = null;
+        $version      = null;
 
         if (preg_match('/linux/i', $u_agent)) {
             $platform = 'linux';
@@ -118,9 +118,8 @@ class VisitorTracking
             $ub = "Netscape";
         }
 
-        $known = ['Version', $ub, 'other'];
-
-        $join = implode('|', $known);
+        $known   = ['Version', $ub, 'other'];
+        $join    = implode('|', $known);
         $pattern = '#(?<browser>' . $join . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
 
         preg_match_all($pattern, $u_agent, $matches);
@@ -182,7 +181,7 @@ class VisitorTracking
             return;
         }
 
-        $response_array = $status['data']['geo'];
+        $response_array         = $status['data']['geo'];
         $this->country          = $response_array['country_name'];
         $this->country_code     = $response_array['country_code'];
         $this->state            = $response_array['region_name'];
@@ -196,7 +195,6 @@ class VisitorTracking
         $this->metro_code       = $response_array['metro_code'];
         $this->timezone         = $response_array['timezone'];
         $this->datetime         = $response_array['datetime'];
-
-        $this->browser = (object) $this->getBrowser();
+        $this->browser          = (object) $this->getBrowser();
     }
 }
