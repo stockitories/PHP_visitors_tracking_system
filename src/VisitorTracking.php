@@ -169,6 +169,7 @@ class VisitorTracking
             CURLOPT_URL            => 'https://tools.keycdn.com/geo.json?host=' . $this->ip
         ]);
         $response = curl_exec($curl);
+        curl_close($curl);
         $status   = json_decode($response, true);
 
         if ($status['status'] == 'error') {
